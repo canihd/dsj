@@ -1,0 +1,109 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url(.././images/login_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .loginAndRegBox {
+        width: 400px;
+        height: 310px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .title-box {
+            height: 60px;
+            background: url(../images/login_title.png) no-repeat center;
+        }
+        .reg-box {
+            display: none;
+            form {
+                input {
+                    box-sizing: border-box;
+                    display: block;
+                    margin: 0 30px 10px;
+                    outline: cyan;
+                    border: 1px dashed rgba(200, 150, 179, .5);
+                    height: 40px;
+                    line-height: 40px;
+                    width: 100% - 15px;
+                    text-indent: 1em;
+                    margin-bottom: 10px;
+                    &::placeholder {
+                        color: #ddc;
+                    }
+                }
+                #submitzc {
+                    cursor: pointer;
+                    margin: 0 30px;
+                    width: 100% - 15px;
+                    position: absolute;
+                    bottom: 45px;
+                    background-color: #75ed9c;
+                    color: #fff;
+                    text-indent: 0;
+                }
+            }
+            #link-login {
+                position: absolute;
+                bottom: 20px;
+                right: 10px;
+            }
+        }
+        .login-box {
+            form {
+                input {
+                    box-sizing: border-box;
+                    display: block;
+                    margin: 0 30px 10px;
+                    outline: cyan;
+                    border: 1px dashed rgba(200, 150, 179, .5);
+                    height: 40px;
+                    line-height: 40px;
+                    width: 100% - 15px;
+                    text-indent: 1em;
+                    margin-bottom: 10px;
+                    &::placeholder {
+                        color: #333;
+                    }
+                }
+                #submit {
+                    cursor: pointer;
+                    margin: 0 30px;
+                    width: 100% - 15px;
+                    position: absolute;
+                    bottom: 45px;
+                    background-color: #75ed9c;
+                    color: #fff;
+                    text-indent: 0;
+                }
+            }
+            #link-reg {
+                position: absolute;
+                bottom: 20px;
+                right: 10px;
+            }
+        }
+    }
+}
+
+.layui-form-item {
+    position: relative;
+    i {
+        position: absolute;
+        left: 8px;
+        top: 10px;
+    }
+    &.links {
+        position: static;
+        a {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+}
