@@ -4,14 +4,14 @@ function getUserInfo() {
         method: "GET",
         url: "/my/userinfo",
         success: function(res) {
-            console.log(res);
+            // console.log(res);
             if (res.status !== 0) {
                 // return;
                 return layui.layer.msg(res.message);
             }
             let data = res.data;
             let uname = data.nickname || data.username;
-            console.log(res);
+            // console.log($("#welcome")[0]);
             $("#welcome").html("欢迎&nbsp;&nbsp;" + uname);
             data.user_pic === null &&
                 $(".layui-nav-img")
@@ -22,7 +22,7 @@ function getUserInfo() {
                     .toUpperCase()) || $(".layui-nav-img")
                 .show()
                 .attr('src', data.user_pic)
-                .sibling(".text-avatar")
+                .siblings(".text-avatar")
                 .hide()
         },
         // complete: function(res) {
@@ -37,12 +37,11 @@ function getUserInfo() {
     });
 }
 
-$(function(e) {
+$(function() {
     getUserInfo();
 
     var layer = layui.layer;
-
-    $("#btnLogout").click(function(e) {
+    $("#btnLogout ").on('click', function(e) {
         layer.confirm('确定退出登录?', { icon: 3, title: '提示' },
             function(index) {
                 // do something
