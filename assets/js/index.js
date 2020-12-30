@@ -6,8 +6,8 @@ function getUserInfo() {
         success: function(res) {
             console.log(res);
             if (res.status !== 0) {
-                return;
-                return layui.msg(res.message);
+                // return;
+                return layui.layer.msg(res.message);
             }
             let data = res.data;
             let uname = data.nickname || data.username;
@@ -25,12 +25,31 @@ function getUserInfo() {
                 .sibling(".text-avatar")
                 .hide()
         },
+        // complete: function(res) {
+        //     // console.log('执行了complete函数');
+        //     // 在complete中的res.responseJSON === success里的res
+        //     console.log(res.responseJSON);
+        //     if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
+        //         localStorage.removeItem('token');
+        //         location.href = '/login.html'
+        //     }
+        // }
     });
 }
 
 $(function(e) {
     getUserInfo();
-    $("#btnLogout").click(function(e) {
 
+    var layer = layui.layer;
+
+    $("#btnLogout").click(function(e) {
+        layer.confirm('确定退出登录?', { icon: 3, title: '提示' },
+            function(index) {
+                // do something
+                localStorage.removeItem('token');
+                location.href = '/login.html'
+
+                layer.close(index)
+            })
     })
 });
