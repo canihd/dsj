@@ -26,26 +26,23 @@ $(function(e) {
 
     // 为添加类别按钮绑定点击事件
 
-    $("body").on([{
-        'submit #form-add': function(e) {
-            e.preventDefault();
-            $.ajax({
-                method: "POST",
-                url: "/my/article/addcates",
-                data: $('#form-add').serialize(),
-                success: function(res) {
-                    if (res.status !== 0) {
-                        return layer.msg('新增分类失败！')
-                    }
-                    initArtCateList()
-                    layer.msg('新增分类成功！')
-                        // 根据索引，关闭对应的弹出层
-                    layer.close(indexAdd)
+    $("body").on('submit ', '#form-add', function(e) {
+        e.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/my/article/addcates",
+            data: $('#form-add').serialize(),
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg('新增分类失败！')
                 }
-            })
-        },
-
-    }])
+                initArtCateList()
+                layer.msg('新增分类成功！')
+                    // 根据索引，关闭对应的弹出层
+                layer.close(indexAdd)
+            }
+        })
+    })
     $('body').on('submit', '#form-edit', function(e) {
         e.preventDefault();
         $.ajax({
@@ -80,9 +77,30 @@ $(function(e) {
             success: function(res) {
                 console.log(res);
                 form.val('form-edit', res.data)
-                $("#tpl-table [name=name]").val(res.data.name)
-                $("#tpl-table [name=alias]").val(res.data.alias)
+                    // $("#tpl-table [name=name]").val(res.data.name)
+                    // $("#tpl-table [name=alias]").val(res.data.alias)
             }
+        })
+    })
+
+    $('tbody').on('click', '.btn-delete', function() {
+        var id = $(this).attr('data-id')
+            // 提示用户是否要删除
+        layer.confirm('确认删除?', { icon: 3, title: '提示' }, function(index) {
+            $.ajax({
+                method: 'GET',
+                url: '/my/article/deletecate/' + id,
+                success: function(res) {
+                    console.log(res);
+                    if (res.status !== 0) {
+                        initArtCateList()
+                        return layer.msg('删除分类失败！')
+                    }
+                    layer.msg('删除分类成功！')
+                    layer.close(index)
+                    initArtCateList()
+                }
+            })
         })
     })
 })
